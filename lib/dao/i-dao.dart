@@ -20,6 +20,8 @@ abstract class IDAO<T extends Entity>{
   ///search for id data table
   Future<T> getById(T entity);
 
+  Future<List<Entity>> fetch(String column, var value);
+
   ///count data table
   Future<int> count();
 }

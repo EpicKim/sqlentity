@@ -19,6 +19,9 @@ abstract class IDAORepository<T extends Entity>{
   ///search for id data table
   Future<T> getById(T entity);
 
+  ///search data for specific column
+  Future<List<Entity>> fetch(String column, var value);
+
   ///count data table
   Future<int> count();
 }
