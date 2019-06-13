@@ -103,13 +103,15 @@ class DAORepository<T extends Entity> implements IDAORepository<T> {
   }
 
   @override
-  Future<List<Entity>> fetch(String column, var value) async {
+  Future<List<T>> fetch(String column, var value) async {
     try {
       var result;
       await Repository().coroutine(() async {
         result = await idao.fetch(column, value);
       });
-      return result;
+      List<T> itens = await new List();
+      await result.forEach((item) => itens.add(item as T));
+      return await itens;
     } catch (e) {
       return await null;
     }

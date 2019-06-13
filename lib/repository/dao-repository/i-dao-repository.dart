@@ -20,7 +20,7 @@ abstract class IDAORepository<T extends Entity>{
   Future<T> getById(T entity);
 
   ///search data for specific column
-  Future<List<Entity>> fetch(String column, var value);
+  Future<List<T>> fetch(String column, var value);
 
   ///count data table
   Future<int> count();

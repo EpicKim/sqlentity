@@ -127,20 +127,11 @@ class DAO<T extends Entity> extends AbstractRepository implements IDAO<T> {
 
   ///search for specific data table
   @override
-  Future<List<Entity>> fetch(String column, var value) async {
+  Future<List<T>> fetch(String column, var value) async {
     await open();
     var list = await database.rawQuery('SELECT * FROM ${_entity.table} WHERE ${column} = \'${value}\'');
     await close();
-    List<Entity> result = [];
-    for (var item in list) {
-      var mapped = _entity.map(item);
-      result.add(mapped);
-    }
-    return result;
-    // return await list.map((origin) {
-    //   return _entity.map(origin);
-    // });
-    // return await _entity.map(select);
+    return await list.map((i) => _entity.map(i)).toList();
   }
 
   ///count data table
